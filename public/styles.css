@@ -1,0 +1,331 @@
+:root {
+  color-scheme: dark;
+  --bg: #111315;
+  --panel: #191d20;
+  --panel-strong: #20262a;
+  --line: #30383d;
+  --text: #f3f6f8;
+  --muted: #9aa7ad;
+  --accent: #39d98a;
+  --accent-dark: #12945a;
+  --danger: #ff6b6b;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    linear-gradient(180deg, rgba(57, 217, 138, 0.08), transparent 280px),
+    var(--bg);
+  color: var(--text);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 1px solid var(--line);
+  background: var(--panel-strong);
+  color: var(--text);
+  cursor: pointer;
+}
+
+button:hover,
+.file-tool:hover {
+  border-color: #536068;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) minmax(180px, 24vh);
+  gap: 14px;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+.topbar,
+.editor-pane,
+.board-pane,
+.output-pane {
+  border: 1px solid var(--line);
+  background: rgba(25, 29, 32, 0.94);
+  box-shadow: var(--shadow);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 12px 14px;
+  border-radius: 8px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 220px;
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #06140d;
+  font-weight: 850;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 14px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.brand p,
+.pane-header span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.room-form {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.room-form label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.room-form input {
+  width: min(32vw, 300px);
+  min-width: 150px;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #0d1012;
+  color: var(--text);
+  padding: 0 10px;
+}
+
+.room-form button,
+.run-button,
+.toolstrip button,
+.file-tool {
+  min-height: 38px;
+  border-radius: 6px;
+  padding: 0 12px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.35fr) minmax(320px, 0.9fr);
+  gap: 14px;
+  min-height: 0;
+}
+
+.editor-pane,
+.board-pane,
+.output-pane {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pane-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 58px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(32, 38, 42, 0.72);
+}
+
+.run-button {
+  border-color: transparent;
+  background: var(--accent);
+  color: #06140d;
+  font-weight: 800;
+}
+
+.run-button.running {
+  background: #f6c450;
+}
+
+#codeEditor {
+  flex: 1;
+  width: 100%;
+  min-height: 420px;
+  resize: none;
+  border: 0;
+  outline: none;
+  padding: 18px;
+  background: #0b0f11;
+  color: #edf7ff;
+  font-family: "Cascadia Code", "Fira Code", Consolas, monospace;
+  font-size: 15px;
+  line-height: 1.55;
+  tab-size: 4;
+}
+
+.toolstrip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(74px, auto)) 44px minmax(90px, 1fr) repeat(2, minmax(78px, auto));
+  gap: 8px;
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+  background: #14181b;
+}
+
+.tool.active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+#colorPicker {
+  width: 44px;
+  height: 38px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel-strong);
+}
+
+#sizeSlider {
+  width: 100%;
+  min-width: 80px;
+  accent-color: var(--accent);
+}
+
+.file-tool {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: var(--panel-strong);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.file-tool input {
+  display: none;
+}
+
+.canvas-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.035) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.035) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.035) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.035) 75%),
+    #22282c;
+  background-size: 26px 26px;
+  background-position: 0 0, 0 13px, 13px -13px, -13px 0;
+}
+
+#drawCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.output-pane {
+  min-height: 180px;
+}
+
+#outputBox {
+  flex: 1;
+  margin: 0;
+  overflow: auto;
+  padding: 14px 16px;
+  background: #080b0d;
+  color: #d9ffe9;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-rows: auto auto minmax(190px, 28vh);
+  }
+
+  .topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .room-form {
+    justify-content: stretch;
+  }
+
+  .room-form input {
+    flex: 1;
+    width: auto;
+  }
+
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  #codeEditor {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    padding: 10px;
+  }
+
+  .toolstrip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #colorPicker,
+  #sizeSlider {
+    width: 100%;
+  }
+}

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Live Python Room</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="mark">Py</span>
+          <div>
+            <h1>Live Python Room</h1>
+            <p id="presence">Подключение...</p>
+          </div>
+        </div>
+
+        <form id="roomForm" class="room-form">
+          <label for="roomInput">Комната</label>
+          <input id="roomInput" name="room" autocomplete="off" maxlength="48" />
+          <button type="submit">Войти</button>
+          <button id="copyLinkButton" type="button">Ссылка</button>
+        </form>
+      </header>
+
+      <section class="workspace" aria-label="Live coding workspace">
+        <section class="editor-pane" aria-label="Python editor">
+          <div class="pane-header">
+            <div>
+              <h2>Python</h2>
+              <span>Python 3</span>
+            </div>
+            <button id="runButton" class="run-button" type="button">Запустить</button>
+          </div>
+          <textarea
+            id="codeEditor"
+            spellcheck="false"
+            aria-label="Python code editor"
+          ></textarea>
+        </section>
+
+        <section class="board-pane" aria-label="Drawing board">
+          <div class="pane-header">
+            <div>
+              <h2>Board</h2>
+              <span>Общая доска</span>
+            </div>
+          </div>
+
+          <div class="toolstrip" aria-label="Board tools">
+            <button class="tool active" data-tool="pen" type="button" title="Рисовать">Перо</button>
+            <button class="tool" data-tool="eraser" type="button" title="Стереть">Ластик</button>
+            <input id="colorPicker" type="color" value="#1f2937" title="Цвет" />
+            <input id="sizeSlider" type="range" min="2" max="42" value="8" title="Brush size" />
+            <label class="file-tool" title="Вставить изображение">
+              Картинка
+              <input id="imageInput" type="file" accept="image/*" />
+            </label>
+            <button id="clearBoardButton" type="button">Очистить</button>
+          </div>
+
+          <div class="canvas-wrap">
+            <canvas id="drawCanvas" width="900" height="620" aria-label="Shared drawing canvas"></canvas>
+          </div>
+        </section>
+      </section>
+
+      <section class="output-pane" aria-label="Python output">
+        <div class="pane-header">
+          <div>
+            <h2>Output</h2>
+            <span id="runStatus">Готово</span>
+          </div>
+        </div>
+        <pre id="outputBox"></pre>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
