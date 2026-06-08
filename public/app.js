@@ -1,4 +1,4 @@
-const clientId = crypto.randomUUID();
+const clientId = createClientId();
 const roomInput = document.querySelector("#roomInput");
 const roomForm = document.querySelector("#roomForm");
 const copyLinkButton = document.querySelector("#copyLinkButton");
@@ -45,7 +45,7 @@ roomForm.addEventListener("submit", (event) => {
 copyLinkButton.addEventListener("click", async () => {
   const url = new URL(location.href);
   url.searchParams.set("room", room);
-  await navigator.clipboard.writeText(url.toString());
+  await copyText(url.toString());
   copyLinkButton.textContent = "Скопировано";
   setTimeout(() => {
     copyLinkButton.textContent = "Ссылка";
@@ -132,6 +132,32 @@ clearBoardButton.addEventListener("click", () => {
 function getInitialRoom() {
   const params = new URLSearchParams(location.search);
   return normalizeRoom(params.get("room") || randomRoomName());
+}
+
+function createClientId() {
+  if (globalThis.crypto?.randomUUID) {
+    return globalThis.crypto.randomUUID();
+  }
+
+  const randomPart = Math.random().toString(36).slice(2);
+  return `client-${Date.now().toString(36)}-${randomPart}`;
+}
+
+async function copyText(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const input = document.createElement("textarea");
+  input.value = text;
+  input.setAttribute("readonly", "");
+  input.style.position = "fixed";
+  input.style.left = "-9999px";
+  document.body.appendChild(input);
+  input.select();
+  document.execCommand("copy");
+  input.remove();
 }
 
 function normalizeRoom(value) {
